@@ -38,6 +38,8 @@ class TextFieldValidator {
   /// specialCharactersRequired
   /// numbersRequired
   /// specialCharacters
+  /// minPasswordLength default value: 8
+  /// maxPasswordLength default value: 30
   /// emptyPasswordErrorMessage default message: Please enter the password.
   /// invalidPasswordErrorMessage default message: Please enter a valid password
   /// lowercaseErrorMessage default message: Please include a lower case letter in your password
@@ -52,6 +54,7 @@ class TextFieldValidator {
     bool? specialCharactersRequired = true,
     bool? numbersRequired = true,
     int? minPasswordLength = 8,
+    int? maxPasswordLength = 30,
     String? specialCharacters = "!@#\$&*~",
     String? emptyPasswordErrorMessage,
     String? invalidPasswordErrorMessage,
@@ -61,7 +64,6 @@ class TextFieldValidator {
     String? specialCharacterErrorMessage,
     String? minPasswordLengthErrorMessage,
   }) {
-    String specialCharacterPattern = "r'[$specialCharacters]'";
     if (password == null || password.isEmpty) {
       return emptyPasswordErrorMessage ?? Constants.emptyPasswordErrorMessage;
     } else if (lowerCaseRequired! && !password.contains(RegExp(r'[a-z]'))) {
@@ -70,10 +72,13 @@ class TextFieldValidator {
       return uppercaseErrorMessage ?? Constants.upperCasePasswordErrorMessage;
     } else if (numbersRequired! && !password.contains(RegExp(r'[0-9]'))) {
       return numberErrorMessage ?? Constants.numberPasswordErrorMessage;
-    } else if (specialCharactersRequired! && !password.contains(RegExp(specialCharacterPattern))) {
+    } else if (specialCharactersRequired! && !password.contains(RegExp(r'[' + specialCharacters! + r']'))) {
       return specialCharacterErrorMessage ?? Constants.specialPasswordErrorMessage;
     } else if(password.length < minPasswordLength!){
       String errMessage = Constants.minPasswordLengthErrorMessage.replaceAll("%s", "$minPasswordLength");
+      return minPasswordLengthErrorMessage ?? errMessage;
+    } else if(password.length > maxPasswordLength!){
+      String errMessage = Constants.maxPasswordLengthErrorMessage.replaceAll("%s", "$maxPasswordLength");
       return minPasswordLengthErrorMessage ?? errMessage;
     }
 

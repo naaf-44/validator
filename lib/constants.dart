@@ -14,6 +14,7 @@ class Constants {
   static const String numberPasswordErrorMessage = "Please include a number in your password";
   static const String specialPasswordErrorMessage = "Please include a special character in your password";
   static String minPasswordLengthErrorMessage = "Password should contain at least %s characters";
+  static String maxPasswordLengthErrorMessage = "Password shouldn't exceed %s characters";
 
   // Regex
   static RegExp passwordRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
