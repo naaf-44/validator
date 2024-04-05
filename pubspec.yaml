@@ -1,10 +1,10 @@
-name: flutter_validator
-description: A flutter package for both andriod and iOS which provides the validation functionalities for the input fields.
-version: 0.0.1
+name: text_field_validator
+description: A flutter package for both Android and iOS which provides the validation functionalities for the input fields.
+version: 0.0.2
 homepage: https://github.com/naaf-44/validator
 
 environment:
-  sdk: '>=2.1.0 <4.0.0'
+  sdk: '>=2.12.0 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:

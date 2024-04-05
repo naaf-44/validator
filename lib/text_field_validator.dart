@@ -1,9 +1,9 @@
-library validator;
+library text_field_validator;
 
-import 'package:validator/Constants.dart';
+import 'package:text_field_validator/Constants.dart';
 
-/// FlutterValidator class is a class to provide validations for the input.
-class FlutterValidator {
+/// TextFieldValidator class is a class to provide validations for the input.
+class TextFieldValidator {
 
   /// textValidator provides validation for the TextFormField input.
   ///

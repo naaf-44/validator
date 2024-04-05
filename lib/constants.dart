@@ -1,6 +1,7 @@
+/// constant class is used to keep the constant error messages.
 class Constants {
   // Error messages
-  // Name validation message
+  // Text validation message
   static const String emptyTextErrorMessage = "Please enter";
   static String minLengthErrorMessage = "Name should contain at least %s characters.";
   static String maxLengthErrorMessage = "Name should not exceed %s characters.";
