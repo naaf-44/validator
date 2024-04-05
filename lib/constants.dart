@@ -2,9 +2,9 @@
 class Constants {
   // Error messages
   // Text validation message
-  static const String emptyTextErrorMessage = "Please enter";
-  static String minLengthErrorMessage = "Name should contain at least %s characters.";
-  static String maxLengthErrorMessage = "Name should not exceed %s characters.";
+  static const String emptyTextErrorMessage = "This field shouldn't be empty";
+  static String minLengthErrorMessage = "Field should contain at least %s characters.";
+  static String maxLengthErrorMessage = "Field should not exceed %s characters.";
 
   // Password validation message
   static const String invalidPasswordErrorMessage = "Please enter a valid password";

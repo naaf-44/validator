@@ -15,7 +15,7 @@ A flutter package for both Android and iOS which provides the validation functio
 
 ## Features
 
-Provides validation for below input types 
+Provides validation for the input types 
     1. text
     2. password
 
@@ -25,4 +25,46 @@ Add the text_field_validator package into pubspec.yaml file start working.
 
 ## Usage
 
-to be added
+import 'package:flutter/material.dart';
+import 'package:text_field_validator/text_field_validator.dart';
+
+class ValidatorTest extends StatefulWidget {
+    const ValidatorTest({Key? key}) : super(key: key);
+
+    @override
+    State<ValidatorTest> createState() => _ValidatorTestState();
+}
+
+class _ValidatorTestState extends State<ValidatorTest> {
+    @override
+    Widget build(BuildContext context) {
+        return Scaffold(
+            appBar: AppBar(),
+            body: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Center(
+                    child: Column(
+                        children: [
+                            TextFormField(
+                                validator: (value) {
+                                    return TextFieldValidator.textValidator(
+                                        value: value,
+                                    );
+                                },
+                            ),
+                            const SizedBox(height: 20),
+                            TextFormField(
+                                validator: (value) {
+                                    return TextFieldValidator.passWordValidator(
+                                        password: value,
+                                    );
+                                },
+                            ),
+                        ],
+                    ),
+                ),
+            ),
+        );
+    }
+}
+
