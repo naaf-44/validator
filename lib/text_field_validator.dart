@@ -1,6 +1,6 @@
 library text_field_validator;
 
-import 'package:text_field_validator/Constants.dart';
+import 'package:text_field_validator/constants.dart';
 
 /// TextFieldValidator class is a class to provide validations for the input.
 class TextFieldValidator {
