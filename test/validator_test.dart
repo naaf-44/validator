@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:validator/validator.dart';
+import 'package:validator/FlutterValidator.dart';
 
 void main() {
   test('adds one to input values', () {
