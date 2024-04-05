@@ -12,3 +12,6 @@
 * fixed bugs
 * made value field and password field required
 * updated default error messages
+
+## 0.0.4
+* major bug fix in password validator field.

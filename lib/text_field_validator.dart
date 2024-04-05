@@ -71,7 +71,7 @@ class TextFieldValidator {
     } else if (numbersRequired! && !password.contains(RegExp(r'[0-9]'))) {
       return numberErrorMessage ?? Constants.numberPasswordErrorMessage;
     } else if (specialCharactersRequired! && !password.contains(RegExp(specialCharacterPattern))) {
-      return lowercaseErrorMessage ?? Constants.lowerCasePasswordErrorMessage;
+      return specialCharacterErrorMessage ?? Constants.specialPasswordErrorMessage;
     } else if(password.length < minPasswordLength!){
       String errMessage = Constants.minPasswordLengthErrorMessage.replaceAll("%s", "$minPasswordLength");
       return minPasswordLengthErrorMessage ?? errMessage;
