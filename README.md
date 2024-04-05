@@ -21,7 +21,8 @@ Provides validation for the input types
 
 ## Getting started
 
-Add the text_field_validator package into pubspec.yaml file start working.
+Add the ```text_field_validator``` package into pubspec.yaml file start working.
+import the package as ```import 'package:text_field_validator/text_field_validator.dart';```
 
 ## Usage
 
