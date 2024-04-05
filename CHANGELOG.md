@@ -18,3 +18,6 @@
 
 ## 0.0.5
 * added maximum length for password character.
+
+## 0.0.6
+* minor bug fix.
