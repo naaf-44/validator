@@ -25,7 +25,7 @@ Add the text_field_validator package into pubspec.yaml file start working.
 
 ## Usage
 
-import 'package:flutter/material.dart';
+```import 'package:flutter/material.dart';
 import 'package:text_field_validator/text_field_validator.dart';
 
 class ValidatorTest extends StatefulWidget {
@@ -67,4 +67,5 @@ class _ValidatorTestState extends State<ValidatorTest> {
         );
     }
 }
+```
 
