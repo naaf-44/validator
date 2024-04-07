@@ -4,7 +4,6 @@ import 'package:text_field_validator/constants.dart';
 
 /// TextFieldValidator class is a class to provide validations for the input.
 class TextFieldValidator {
-
   /// textValidator provides validation for the TextFormField input.
   ///
   /// parameters
@@ -14,7 +13,8 @@ class TextFieldValidator {
   /// 4. emptyNameErrorMessage defaultMessage: Please enter.
   /// 5. minLengthErrorMessage defaultMessage: Name should contain at least %s characters.
   /// 6. maxLengthErrorMessage defaultMessage: Name should not exceed %s characters.
-  static textValidator({required String? value, int? minLength, int? maxLength, String? emptyNameErrorMessage, String? minLengthErrorMessage, String? maxLengthErrorMessage}) {
+  static textValidator(
+      {required String? value, int? minLength, int? maxLength, String? emptyNameErrorMessage, String? minLengthErrorMessage, String? maxLengthErrorMessage}) {
     if (value == null || value.isEmpty) {
       return emptyNameErrorMessage ?? Constants.emptyTextErrorMessage;
     } else if (minLength != null && value.length < minLength) {
@@ -74,12 +74,86 @@ class TextFieldValidator {
       return numberErrorMessage ?? Constants.numberPasswordErrorMessage;
     } else if (specialCharactersRequired! && !password.contains(RegExp(r'[' + specialCharacters! + r']'))) {
       return specialCharacterErrorMessage ?? Constants.specialPasswordErrorMessage;
-    } else if(password.length < minPasswordLength!){
+    } else if (password.length < minPasswordLength!) {
       String errMessage = Constants.minPasswordLengthErrorMessage.replaceAll("%s", "$minPasswordLength");
       return minPasswordLengthErrorMessage ?? errMessage;
-    } else if(password.length > maxPasswordLength!){
+    } else if (password.length > maxPasswordLength!) {
       String errMessage = Constants.maxPasswordLengthErrorMessage.replaceAll("%s", "$maxPasswordLength");
       return minPasswordLengthErrorMessage ?? errMessage;
+    }
+
+    return "";
+  }
+
+  /// emailValidator provides validation for the TextFormField email type.
+  /// Used regex: RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+  ///
+  /// parameters
+  /// email, it is a required field.
+  /// emptyEmailErrorMessage default message: Please enter the email address.
+  /// invalidEmailErrorMessage default message: Please enter the valid email address.
+  static emailValidator({
+    required String? email,
+    String? emptyEmailErrorMessage,
+    String? invalidEmailErrorMessage,
+  }) {
+    if (email == null || email.isEmpty) {
+      return emptyEmailErrorMessage ?? Constants.emptyEmailErrorMessage;
+    } else if (!Constants.emailRegex.hasMatch(email)) {
+      return invalidEmailErrorMessage ?? Constants.invalidEmailErrorMessage;
+    }
+    return "";
+  }
+
+  /// phoneValidator provides validation for the TextFormField phone type.
+  ///
+  /// parameters
+  /// phoneNumber: it is a required parameter.
+  /// maxLength default value: 10
+  /// emptyPhoneNumberErrorMessage default message: Please enter the phone number.
+  /// maxLengthPhoneNumberErrorMessage default message: Phone number should not exceed %s digits.
+  /// alphabetsPhoneNumberErrorMessage default message: Please enter only the numbers.
+  static phoneValidator({
+    required String? phoneNumber,
+    int? maxLength = 10,
+    String? emptyPhoneNumberErrorMessage,
+    String? maxLengthPhoneNumberErrorMessage,
+    String? alphabetsPhoneNumberErrorMessage,
+  }) {
+    if (phoneNumber == null || phoneNumber.isEmpty) {
+      return emptyPhoneNumberErrorMessage ?? Constants.emptyPhoneNumberErrorMessage;
+    } else if (phoneNumber.contains(RegExp(r'[a-zA-Z]'))) {
+      return alphabetsPhoneNumberErrorMessage ?? Constants.alphabetPhoneNumberErrorMessage;
+    } else if (phoneNumber.length > maxLength!) {
+      return maxLengthPhoneNumberErrorMessage ?? Constants.maxPhoneNumberLengthErrorMessage.replaceAll("%s", "$maxLength");
+    }
+
+    return "";
+  }
+
+  /// phoneValidator provides validation for the TextFormField phone type.
+  /// Regex used RegExp(r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?')
+  ///
+  /// parameters
+  /// url : it is a required parameter
+  /// emptyUrlErrorMessage default message: Please enter the URL. ex: https://www.url.com
+  /// invalidUrlErrorMessage default message: Please enter the valid URL. ex: https://www.url.com
+  static urlValidator({
+    required String? url,
+    String? emptyUrlErrorMessage,
+    String? invalidUrlErrorMessage,
+  }) {
+    if (url == null || url.isEmpty) {
+      return emptyUrlErrorMessage ?? Constants.emptyUrlErrorMessage;
+    } else {
+      if (!Constants.urlRegex.hasMatch(url)) {
+        return invalidUrlErrorMessage ?? Constants.invalidUrlErrorMessage;
+      } else {
+        String lastPart = url.split(".").last;
+        if (lastPart.isEmpty) {
+          return invalidUrlErrorMessage ?? Constants.invalidUrlErrorMessage;
+        }
+      }
     }
 
     return "";

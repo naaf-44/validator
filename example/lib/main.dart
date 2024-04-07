@@ -31,7 +31,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,29 +38,43 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextFormField(
-              validator: (value) {
-                return TextFieldValidator.textValidator(
-                  value: value,
-                );
-              },
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-            ),
-            const SizedBox(height: 20),
-            TextFormField(
-              validator: (value) {
-                return TextFieldValidator.passWordValidator(
-                  password: value,
-                  minPasswordLength: 8,
-                );
-              },
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-            ),
-          ],
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextFormField(
+                validator: (value) {
+                  return TextFieldValidator.textValidator(
+                    value: value,
+                    minLength: 2,
+                    maxLength: 5,
+                  );
+                },
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                validator: (value) {
+                  return TextFieldValidator.passWordValidator(
+                    password: value,
+                    minPasswordLength: 8,
+                  );
+                },
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+              ),
+              TextFormField(
+                validator: (value) {
+                  return TextFieldValidator.urlValidator(
+                    url: value,
+                  );
+                },
+                keyboardType: TextInputType.url,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+              ),
+            ],
+          ),
         ),
       ),
     );

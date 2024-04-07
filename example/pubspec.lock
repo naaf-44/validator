@@ -171,10 +171,9 @@ packages:
   text_field_validator:
     dependency: "direct main"
     description:
-      name: text_field_validator
-      sha256: "51294f26b3002aac93cc08db1405894a894076ff5501e3e3503a4e43dc043b47"
-      url: "https://pub.dev"
-    source: hosted
+      path: ".."
+      relative: true
+    source: path
     version: "0.0.6"
   vector_math:
     dependency: transitive
