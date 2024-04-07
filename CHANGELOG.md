@@ -24,3 +24,6 @@
 
 ## 0.0.7
 * added validations for email, phone and url.
+
+## 0.0.8
+* minor bug fix.
