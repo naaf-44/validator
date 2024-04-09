@@ -18,6 +18,9 @@ A flutter package for both Android and iOS which provides the validation functio
 Provides validation for the input types 
     1. text
     2. password
+    3. email
+    4. phone
+    5. url
 
 ## Getting started
 

@@ -27,3 +27,6 @@
 
 ## 0.0.8
 * minor bug fix.
+
+## 0.0.9
+* major bug fix.

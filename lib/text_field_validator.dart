@@ -25,7 +25,7 @@ class TextFieldValidator {
       return maxLengthErrorMessage ?? maxMessage;
     }
 
-    return "";
+    return null;
   }
 
   /// passWordValidator provides validation for the TextFormField password type.
@@ -82,7 +82,7 @@ class TextFieldValidator {
       return minPasswordLengthErrorMessage ?? errMessage;
     }
 
-    return "";
+    return null;
   }
 
   /// emailValidator provides validation for the TextFormField email type.
@@ -102,7 +102,7 @@ class TextFieldValidator {
     } else if (!Constants.emailRegex.hasMatch(email)) {
       return invalidEmailErrorMessage ?? Constants.invalidEmailErrorMessage;
     }
-    return "";
+    return null;
   }
 
   /// phoneValidator provides validation for the TextFormField phone type.
@@ -128,7 +128,7 @@ class TextFieldValidator {
       return maxLengthPhoneNumberErrorMessage ?? Constants.maxPhoneNumberLengthErrorMessage.replaceAll("%s", "$maxLength");
     }
 
-    return "";
+    return null;
   }
 
   /// phoneValidator provides validation for the TextFormField phone type.
@@ -156,6 +156,6 @@ class TextFieldValidator {
       }
     }
 
-    return "";
+    return null;
   }
 }
