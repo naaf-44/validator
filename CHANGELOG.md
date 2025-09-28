@@ -37,3 +37,6 @@
 
 ## 1.0.1
 * uasge document update
+
+## 1.1.1
+* added adhar, pan, dl, ifsc, gst input formatter

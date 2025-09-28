@@ -253,6 +253,441 @@ class InputFormatter {
     }));
     return formatters;
   }
+
+  /// adharFormatter formats input as an Aadhaar number (e.g., XXXX XXXX XXXX).
+  static List<TextInputFormatter> adharFormatter() {
+    return [
+      TextInputFormatter.withFunction((oldValue, newValue) {
+        String newText = newValue.text.replaceAll(RegExp(r'\s+\b|\b\s'), '');
+        if (newText.length > 12) {
+          newText = newText.substring(0, 12);
+        }
+        final StringBuffer buffer = StringBuffer();
+        for (int i = 0; i < newText.length; i++) {
+          buffer.write(newText[i]);
+          final int index = i + 1;
+          if (index % 4 == 0 && index != newText.length) {
+            buffer.write(' '); // Add space after every 4 characters
+          }
+        }
+        final String formattedText = buffer.toString();
+        return TextEditingValue(
+          text: formattedText,
+          selection: TextSelection.collapsed(offset: formattedText.length),
+        );
+      }),
+    ];
+  }
+
+  /// panFormatter formats input as a PAN number (e.g., XXXXX9999X).
+  static List<TextInputFormatter> panFormatter() {
+    return [
+      TextInputFormatter.withFunction((oldValue, newValue) {
+        String newText = newValue.text.toUpperCase();
+        if (newText.length > 10) {
+          newText = newText.substring(0, 10);
+        }
+        final StringBuffer buffer = StringBuffer();
+        for (int i = 0; i < newText.length; i++) {
+          if (i < 5) {
+            // First 5 characters should be alphabets
+            if (RegExp(r'[A-Z]').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          } else if (i < 9) {
+            // Next 4 characters should be digits
+            if (RegExp(r'\d').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          } else {
+            // Last character should be an alphabet
+            if (RegExp(r'[A-Z]').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          }
+        }
+        final String formattedText = buffer.toString();
+        return TextEditingValue(
+          text: formattedText,
+          selection: TextSelection.collapsed(offset: formattedText.length),
+        );
+      }),
+    ];
+  }
+
+  /// gstFormatter formats input as a GST number (e.g., 22AAAAA0000A1Z5).
+  static List<TextInputFormatter> gstFormatter() {
+    return [
+      TextInputFormatter.withFunction((oldValue, newValue) {
+        String newText = newValue.text.toUpperCase();
+        if (newText.length > 15) {
+          newText = newText.substring(0, 15);
+        }
+        final StringBuffer buffer = StringBuffer();
+        for (int i = 0; i < newText.length; i++) {
+          if (i < 2) {
+            // First 2 characters should be digits
+            if (RegExp(r'\d').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          } else if (i < 12) {
+            // Next 10 characters should be alphabets or digits
+            if (RegExp(r'[A-Z0-9]').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          } else if (i == 12) {
+            // 13th character should be an alphabet
+            if (RegExp(r'[A-Z]').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          } else if (i == 13) {
+            // 14th character should be a digit
+            if (RegExp(r'\d').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          } else {
+            // Last character should be an alphabet
+            if (RegExp(r'[A-Z]').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          }
+        }
+        final String formattedText = buffer.toString();
+        return TextEditingValue(
+          text: formattedText,
+          selection: TextSelection.collapsed(offset: formattedText.length),
+        );
+      }),
+    ];
+  }
+
+  /// zipCodeFormatter formats input as a ZIP code (e.g., XXXXX or XXXXX-XXXX).
+  static List<TextInputFormatter> zipCodeFormatter() {
+    return [
+      TextInputFormatter.withFunction((oldValue, newValue) {
+        String newText = newValue.text.replaceAll(RegExp(r'\D'), '');
+        if (newText.length > 9) {
+          newText = newText.substring(0, 9);
+        }
+        final StringBuffer buffer = StringBuffer();
+        for (int i = 0; i < newText.length; i++) {
+          buffer.write(newText[i]);
+          if (i == 4 && newText.length > 5) {
+            buffer.write(
+                '-'); // Add hyphen after first 5 digits if more digits exist
+          }
+        }
+        final String formattedText = buffer.toString();
+        return TextEditingValue(
+          text: formattedText,
+          selection: TextSelection.collapsed(offset: formattedText.length),
+        );
+      }),
+    ];
+  }
+
+  /// customLengthFormatter limits input to a specified maximum length.
+  static List<TextInputFormatter> customLengthFormatter(int maxLength) {
+    return [
+      LengthLimitingTextInputFormatter(maxLength),
+    ];
+  }
+
+  /// customRegexFormatter allows input based on a custom regular expression.
+  static List<TextInputFormatter> customRegexFormatter(String pattern) {
+    return [
+      FilteringTextInputFormatter.allow(RegExp(pattern)),
+    ];
+  }
+
+  /// noSpecialCharacterFormatter prevents special characters.
+  static List<TextInputFormatter> noSpecialCharacterFormatter() {
+    return [
+      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9\s]')),
+    ];
+  }
+
+  /// noEmojiFormatter prevents emoji characters.
+  static List<TextInputFormatter> noEmojiFormatter() {
+    return [
+      FilteringTextInputFormatter.deny(RegExp(r'\p{Emoji}')),
+    ];
+  }
+
+  /// noWhitespaceFormatter prevents all whitespace characters.
+  static List<TextInputFormatter> noWhitespaceFormatter() {
+    return [
+      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+    ];
+  }
+
+  /// noNumbersFormatter prevents numeric input.
+  static List<TextInputFormatter> noNumbersFormatter() {
+    return [
+      FilteringTextInputFormatter.deny(RegExp(r'\d')),
+    ];
+  }
+
+  /// noAlphabetsFormatter prevents alphabetic input.
+  static List<TextInputFormatter> noAlphabetsFormatter() {
+    return [
+      FilteringTextInputFormatter.deny(RegExp(r'[a-zA-Z]')),
+    ];
+  }
+
+  /// drivingLicenseFormatter formats input as a driving license number (e.g., XX-00-00-000000-000000).
+  static List<TextInputFormatter> drivingLicenseFormatter() {
+    return [
+      TextInputFormatter.withFunction((oldValue, newValue) {
+        String newText = newValue.text.replaceAll(RegExp(r'\s+\b|\b\s'), '');
+        if (newText.length > 15) {
+          newText = newText.substring(0, 15);
+        }
+        final StringBuffer buffer = StringBuffer();
+        for (int i = 0; i < newText.length; i++) {
+          buffer.write(newText[i]);
+          final int index = i + 1;
+          if ((index == 2 || index == 4 || index == 6 || index == 12) &&
+              index != newText.length) {
+            buffer.write('-'); // Add hyphen at specific positions
+          }
+        }
+        final String formattedText = buffer.toString();
+        return TextEditingValue(
+          text: formattedText,
+          selection: TextSelection.collapsed(offset: formattedText.length),
+        );
+      }),
+    ];
+  }
+
+  /// vehicleNumberFormatter formats input as a vehicle number (e.g., XX00XX0000).
+  static List<TextInputFormatter> vehicleNumberFormatter() {
+    return [
+      TextInputFormatter.withFunction((oldValue, newValue) {
+        String newText =
+            newValue.text.toUpperCase().replaceAll(RegExp(r'\s+\b|\b\s'), '');
+        if (newText.length > 10) {
+          newText = newText.substring(0, 10);
+        }
+        final StringBuffer buffer = StringBuffer();
+        for (int i = 0; i < newText.length; i++) {
+          if (i < 2) {
+            // First 2 characters should be alphabets
+            if (RegExp(r'[A-Z]').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          } else if (i < 4) {
+            // Next 2 characters should be digits
+            if (RegExp(r'\d').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          } else if (i < 6) {
+            // Next 2 characters should be alphabets
+            if (RegExp(r'[A-Z]').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          } else {
+            // Last 4 characters should be digits
+            if (RegExp(r'\d').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          }
+        }
+        final String formattedText = buffer.toString();
+        return TextEditingValue(
+          text: formattedText,
+          selection: TextSelection.collapsed(offset: formattedText.length),
+        );
+      }),
+    ];
+  }
+
+  /// voterIdFormatter formats input as a voter ID (e.g., ABCD1234567).
+  static List<TextInputFormatter> voterIdFormatter() {
+    return [
+      TextInputFormatter.withFunction((oldValue, newValue) {
+        String newText =
+            newValue.text.toUpperCase().replaceAll(RegExp(r'\s+\b|\b\s'), '');
+        if (newText.length > 10) {
+          newText = newText.substring(0, 10);
+        }
+        final StringBuffer buffer = StringBuffer();
+        for (int i = 0; i < newText.length; i++) {
+          if (i < 3) {
+            // First 3 characters should be alphabets
+            if (RegExp(r'[A-Z]').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          } else if (i < 9) {
+            // Next 6 characters should be digits
+            if (RegExp(r'\d').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          } else {
+            // Last character should be an alphabet
+            if (RegExp(r'[A-Z]').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          }
+        }
+        final String formattedText = buffer.toString();
+        return TextEditingValue(
+          text: formattedText,
+          selection: TextSelection.collapsed(offset: formattedText.length),
+        );
+      }),
+    ];
+  }
+
+  /// ifscFormatter formats input as an IFSC code (e.g., ABCD0123456).
+  static List<TextInputFormatter> ifscFormatter() {
+    return [
+      TextInputFormatter.withFunction((oldValue, newValue) {
+        String newText =
+            newValue.text.toUpperCase().replaceAll(RegExp(r'\s+\b|\b\s'), '');
+        if (newText.length > 11) {
+          newText = newText.substring(0, 11);
+        }
+        final StringBuffer buffer = StringBuffer();
+        for (int i = 0; i < newText.length; i++) {
+          if (i < 4) {
+            // First 4 characters should be alphabets
+            if (RegExp(r'[A-Z]').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          } else if (i == 4) {
+            // 5th character should be '0'
+            if (newText[i] == '0') {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          } else {
+            // Last 6 characters should be digits
+            if (RegExp(r'\d').hasMatch(newText[i])) {
+              buffer.write(newText[i]);
+            } else {
+              break;
+            }
+          }
+        }
+        final String formattedText = buffer.toString();
+        return TextEditingValue(
+          text: formattedText,
+          selection: TextSelection.collapsed(offset: formattedText.length),
+        );
+      }),
+    ];
+  }
+
+  /// indianPhoneNumberFormatter formats input as an Indian phone number (e.g., +91 XXXXX-XXXXX).
+  static List<TextInputFormatter> indianPhoneNumberFormatter() {
+    return [
+      TextInputFormatter.withFunction((oldValue, newValue) {
+        String newText = newValue.text.replaceAll(RegExp(r'\D'), '');
+        if (newText.startsWith('91')) {
+          newText = newText.substring(2);
+        }
+        if (newText.length > 10) {
+          newText = newText.substring(0, 10);
+        }
+        final StringBuffer buffer = StringBuffer();
+        buffer.write('+91 ');
+        for (int i = 0; i < newText.length; i++) {
+          buffer.write(newText[i]);
+          if (i == 4 && newText.length > 5) {
+            buffer.write(
+                '-'); // Add hyphen after first 5 digits if more digits exist
+          }
+        }
+        final String formattedText = buffer.toString();
+        return TextEditingValue(
+          text: formattedText,
+          selection: TextSelection.collapsed(offset: formattedText.length),
+        );
+      }),
+    ];
+  }
+
+  /// maskedFormatter applies a mask to the input.
+  /// Example mask: "****-****-****" where '*' is a placeholder for user input.
+  static List<TextInputFormatter> maskedFormatter(String mask,
+      {String placeholder = '*'}) {
+    final List<TextInputFormatter> formatters = [];
+    String formattedMask = '';
+    int placeholderCount = 0; // Count of placeholder characters
+    for (int i = 0; i < mask.length; i++) {
+      final String char = mask[i];
+      if (char == placeholder) {
+        placeholderCount++;
+        formattedMask += char;
+      } else {
+        formattedMask += char;
+      }
+    }
+    formatters.add(FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9]')));
+    formatters.add(TextInputFormatter.withFunction((oldValue, newValue) {
+      String newText = newValue.text.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '');
+      if (newText.length > placeholderCount) {
+        newText = newText.substring(0, placeholderCount);
+      }
+      final StringBuffer buffer = StringBuffer();
+      int textIndex = 0;
+      for (int i = 0; i < formattedMask.length; i++) {
+        if (formattedMask[i] == placeholder) {
+          if (textIndex < newText.length) {
+            buffer.write(newText[textIndex]);
+            textIndex++;
+          } else {
+            break;
+          }
+        } else {
+          buffer.write(formattedMask[i]);
+        }
+      }
+      final String formattedText = buffer.toString();
+      return TextEditingValue(
+        text: formattedText,
+        selection: TextSelection.collapsed(offset: formattedText.length),
+      );
+    }));
+    return formatters;
+  }
+
+  
 }
 
 // Add this enum at the top of the file, outside the InputFormatter class

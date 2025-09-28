@@ -105,73 +105,91 @@ This package provides a variety of input formatters for Flutter `TextFormField` 
 
 ### Available Formatters
 
-#### 1. Number Formatter
+#### 1. Aadhaar Formatter
+Formats input as an Aadhaar number (e.g., `XXXX XXXX XXXX`).
+```dart
+inputFormatters: InputFormatter.adharFormatter(),
+```
+
+#### 2. PAN Formatter
+Formats input as a PAN (Permanent Account Number) in the structure: `AAAAA9999A`.
+```dart
+inputFormatters: InputFormatter.panFormatter(),
+```
+
+#### 3. IFSC Code Formatter
+Formats input as an IFSC (Indian Financial System Code) code, typically used for Indian bank branches.
+```dart
+inputFormatters: InputFormatter.ifscFormatter(),
+```
+
+#### 4. Number Formatter
 Allows only numeric input (digits only).
 ```dart
 inputFormatters: InputFormatter.numberFormatter(),
 ```
 
-#### 2. Decimal Formatter
+#### 5. Decimal Formatter
 Allows numeric input with decimal points, useful for prices or measurements.
 ```dart
 inputFormatters: InputFormatter.decimalFormatter(decimalRange: 2),
 ```
 
-#### 3. Alphabet Formatter
+#### 6. Alphabet Formatter
 Allows only alphabetic input (letters only).
 ```dart
 inputFormatters: InputFormatter.alphabetFormatter(),
 ```
 
-#### 4. Alphanumeric Formatter
+#### 7. Alphanumeric Formatter
 Allows only alphanumeric input (letters and digits).
 ```dart
 inputFormatters: InputFormatter.alphaNumericFormatter(),
 ```
 
-#### 5. Upper Case Formatter
+#### 8. Upper Case Formatter
 Allows only upper-case alphabetic input.
 ```dart
 inputFormatters: InputFormatter.upperCaseFormatter(),
 ```
 
-#### 6. Lower Case Formatter
+#### 9. Lower Case Formatter
 Allows only lower-case alphabetic input.
 ```dart
 inputFormatters: InputFormatter.lowerCaseFormatter(),
 ```
 
-#### 7. No Leading Space Formatter
+#### 10. No Leading Space Formatter
 Prevents leading spaces in the input.
 ```dart
 inputFormatters: InputFormatter.noLeadingSpaceFormatter(),
 ```
 
-#### 8. No Double Space Formatter
+#### 11. No Double Space Formatter
 Prevents occurrence of double spaces in the input.
 ```dart
 inputFormatters: InputFormatter.noDoubleSpaceFormatter(),
 ```
 
-#### 9. Capitalize First Letter Formatter
+#### 12. Capitalize First Letter Formatter
 Capitalizes the first letter of the input string.
 ```dart
 inputFormatters: InputFormatter.capitalizeFirstLetterFormatter(),
 ```
 
-#### 10. Credit Card Number Formatter
+#### 13. Credit Card Number Formatter
 Formats input to ensure it matches the structure of a credit card number (e.g., 1234-5678-9012-3456).
 ```dart
 inputFormatters: InputFormatter.creditCardNumberFormatter(),
 ```
 
-#### 11. Phone Number Formatter
+#### 14. Phone Number Formatter
 Formats the input to ensure it matches the structure of a phone number, including optional country code.
 ```dart
 inputFormatters: InputFormatter.phoneNumberFormatter(),
 ```
 
-#### 12. Custom Pattern Formatter
+#### 15. Custom Pattern Formatter
 Allows input formatting based on a custom pattern, where `X` represents a required digit.
 ```dart
 inputFormatters: InputFormatter.customPatternFormatter('XXX-XXX-XXXX'),

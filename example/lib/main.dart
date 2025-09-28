@@ -80,6 +80,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: 10),
               TextFormField(
+                  decoration:
+                      const InputDecoration(labelText: 'Adhar Input Formatter'),
+                  inputFormatters: InputFormatter.adharFormatter()),
+              const SizedBox(height: 20),
+              TextFormField(
+                decoration:
+                    const InputDecoration(labelText: 'PAN Input Formatter'),
+                inputFormatters: InputFormatter.panFormatter(),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
                 decoration:
                     const InputDecoration(labelText: 'Date Input Formatter'),
                 inputFormatters: InputFormatter.dateFormatter(
