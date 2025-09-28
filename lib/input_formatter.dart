@@ -209,7 +209,6 @@ class InputFormatter {
 
     final List<TextInputFormatter> formatters = [];
     String formattedFormat = '';
-    int separatorCount = 0;
     // Acceptable pattern chars: D, M, Y, H, S (for date and time)
     final validChars = {'D', 'M', 'Y', 'H', 'S'};
 
@@ -218,7 +217,6 @@ class InputFormatter {
       if (validChars.contains(char)) {
         formattedFormat += char;
       } else {
-        separatorCount++;
         formattedFormat += char;
       }
     }
