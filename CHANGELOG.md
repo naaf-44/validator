@@ -30,3 +30,7 @@
 
 ## 0.0.9
 * major bug fix.
+
+## 1.0.0
+* added inputformatter feature in this release
+* supports any kind of input format.
