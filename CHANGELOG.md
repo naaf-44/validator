@@ -34,3 +34,6 @@
 ## 1.0.0
 * added inputformatter feature in this release
 * supports any kind of input format.
+
+## 1.0.1
+* uasge document update
