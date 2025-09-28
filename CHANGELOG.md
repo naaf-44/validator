@@ -40,3 +40,6 @@
 
 ## 1.1.1
 * added adhar, pan, dl, ifsc, gst input formatter
+
+## 1.1.2
+* updated document
