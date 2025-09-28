@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:text_field_validator/input_formatter.dart';
 import 'package:text_field_validator/text_field_validator.dart';
 
 void main() {
@@ -41,19 +42,20 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
             children: <Widget>[
+              Text("Validators",
+                  style: Theme.of(context).textTheme.headlineMedium),
+              const SizedBox(height: 10),
               TextFormField(
-                validator: (value) {
-                  return TextFieldValidator.textValidator(
-                    value: value,
-                    minLength: 2,
-                    maxLength: 5,
-                  );
-                },
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-              ),
+                  validator: (value) {
+                    return TextFieldValidator.textValidator(
+                      value: value,
+                      minLength: 2,
+                      maxLength: 5,
+                    );
+                  },
+                  autovalidateMode: AutovalidateMode.onUserInteraction),
               const SizedBox(height: 20),
               TextFormField(
                 validator: (value) {
@@ -72,6 +74,52 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 keyboardType: TextInputType.url,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
+              ),
+              const SizedBox(height: 30),
+              Text("Input Formatters",
+                  style: Theme.of(context).textTheme.headlineMedium),
+              const SizedBox(height: 10),
+              TextFormField(
+                decoration:
+                    const InputDecoration(labelText: 'Date Input Formatter'),
+                inputFormatters: InputFormatter.dateFormatter(
+                  FormatterEnum.hhmmssMMDDYYYY24,
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                decoration: const InputDecoration(
+                    labelText: 'Alphabet Input Formatter'),
+                inputFormatters: InputFormatter.alphabetFormatter(),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                decoration:
+                    const InputDecoration(labelText: 'Credit Card Formatter'),
+                keyboardType: TextInputType.number,
+                inputFormatters: InputFormatter.creditCardNumberFormatter(),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                decoration:
+                    const InputDecoration(labelText: 'Phone Number Formatter'),
+                keyboardType: TextInputType.phone,
+                inputFormatters: InputFormatter.phoneNumberFormatter(),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                decoration: const InputDecoration(
+                    labelText: 'Decimal Number Formatter'),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                inputFormatters: InputFormatter.decimalFormatter(),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                decoration: const InputDecoration(
+                    labelText: 'Integer Number Formatter'),
+                keyboardType: TextInputType.number,
+                inputFormatters: InputFormatter.numberFormatter(),
               ),
             ],
           ),
