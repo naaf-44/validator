@@ -686,8 +686,6 @@ class InputFormatter {
     }));
     return formatters;
   }
-
-  
 }
 
 // Add this enum at the top of the file, outside the InputFormatter class

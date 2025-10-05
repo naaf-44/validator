@@ -43,3 +43,6 @@
 
 ## 1.1.2
 * updated document
+
+## 1.1.3
+* cleared lint error and dart formatting

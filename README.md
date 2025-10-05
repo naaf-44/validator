@@ -11,16 +11,18 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-A flutter package for both Android and iOS which provides the validation functionalities for the input fields.
+A flutter package which provides the validation and input format functionalities for the input fields.
 
 ## Features
 
-Provides validation for the input types 
+* Provides validation for the input types 
     1. text
     2. password
     3. email
     4. phone
     5. url
+
+* Provides various input formats
 
 ## Getting started
 

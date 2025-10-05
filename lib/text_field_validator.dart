@@ -13,15 +13,22 @@ class TextFieldValidator {
   /// 4. emptyNameErrorMessage defaultMessage: Please enter.
   /// 5. minLengthErrorMessage defaultMessage: Name should contain at least %s characters.
   /// 6. maxLengthErrorMessage defaultMessage: Name should not exceed %s characters.
-  static textValidator(
-      {required String? value, int? minLength, int? maxLength, String? emptyNameErrorMessage, String? minLengthErrorMessage, String? maxLengthErrorMessage}) {
+  static String? textValidator(
+      {required String? value,
+      int? minLength,
+      int? maxLength,
+      String? emptyNameErrorMessage,
+      String? minLengthErrorMessage,
+      String? maxLengthErrorMessage}) {
     if (value == null || value.isEmpty) {
       return emptyNameErrorMessage ?? Constants.emptyTextErrorMessage;
     } else if (minLength != null && value.length < minLength) {
-      String minMessage = Constants.minLengthErrorMessage.replaceAll("%s", "$minLength");
+      String minMessage =
+          Constants.minLengthErrorMessage.replaceAll("%s", "$minLength");
       return minLengthErrorMessage ?? minMessage;
     } else if (maxLength != null && value.length > maxLength) {
-      String maxMessage = Constants.maxLengthErrorMessage.replaceAll("%s", "$maxLength");
+      String maxMessage =
+          Constants.maxLengthErrorMessage.replaceAll("%s", "$maxLength");
       return maxLengthErrorMessage ?? maxMessage;
     }
 
@@ -47,7 +54,7 @@ class TextFieldValidator {
   /// numberErrorMessage default message: Please include a number in your password
   /// specialCharacterErrorMessage default message: Please include a special character in your password
   /// minPasswordLengthErrorMessage default message: Password should contain at least %s characters
-  static passWordValidator({
+  static String? passWordValidator({
     required String? password,
     bool? lowerCaseRequired = true,
     bool? upperCaseRequired = true,
@@ -72,13 +79,17 @@ class TextFieldValidator {
       return uppercaseErrorMessage ?? Constants.upperCasePasswordErrorMessage;
     } else if (numbersRequired! && !password.contains(RegExp(r'[0-9]'))) {
       return numberErrorMessage ?? Constants.numberPasswordErrorMessage;
-    } else if (specialCharactersRequired! && !password.contains(RegExp(r'[' + specialCharacters! + r']'))) {
-      return specialCharacterErrorMessage ?? Constants.specialPasswordErrorMessage;
+    } else if (specialCharactersRequired! &&
+        !password.contains(RegExp(r'[' + specialCharacters! + r']'))) {
+      return specialCharacterErrorMessage ??
+          Constants.specialPasswordErrorMessage;
     } else if (password.length < minPasswordLength!) {
-      String errMessage = Constants.minPasswordLengthErrorMessage.replaceAll("%s", "$minPasswordLength");
+      String errMessage = Constants.minPasswordLengthErrorMessage
+          .replaceAll("%s", "$minPasswordLength");
       return minPasswordLengthErrorMessage ?? errMessage;
     } else if (password.length > maxPasswordLength!) {
-      String errMessage = Constants.maxPasswordLengthErrorMessage.replaceAll("%s", "$maxPasswordLength");
+      String errMessage = Constants.maxPasswordLengthErrorMessage
+          .replaceAll("%s", "$maxPasswordLength");
       return minPasswordLengthErrorMessage ?? errMessage;
     }
 
@@ -92,7 +103,7 @@ class TextFieldValidator {
   /// email, it is a required field.
   /// emptyEmailErrorMessage default message: Please enter the email address.
   /// invalidEmailErrorMessage default message: Please enter the valid email address.
-  static emailValidator({
+  static String? emailValidator({
     required String? email,
     String? emptyEmailErrorMessage,
     String? invalidEmailErrorMessage,
@@ -113,7 +124,7 @@ class TextFieldValidator {
   /// emptyPhoneNumberErrorMessage default message: Please enter the phone number.
   /// maxLengthPhoneNumberErrorMessage default message: Phone number should not exceed %s digits.
   /// alphabetsPhoneNumberErrorMessage default message: Please enter only the numbers.
-  static phoneValidator({
+  static String? phoneValidator({
     required String? phoneNumber,
     int? maxLength = 10,
     String? emptyPhoneNumberErrorMessage,
@@ -121,11 +132,15 @@ class TextFieldValidator {
     String? alphabetsPhoneNumberErrorMessage,
   }) {
     if (phoneNumber == null || phoneNumber.isEmpty) {
-      return emptyPhoneNumberErrorMessage ?? Constants.emptyPhoneNumberErrorMessage;
+      return emptyPhoneNumberErrorMessage ??
+          Constants.emptyPhoneNumberErrorMessage;
     } else if (phoneNumber.contains(RegExp(r'[a-zA-Z]'))) {
-      return alphabetsPhoneNumberErrorMessage ?? Constants.alphabetPhoneNumberErrorMessage;
+      return alphabetsPhoneNumberErrorMessage ??
+          Constants.alphabetPhoneNumberErrorMessage;
     } else if (phoneNumber.length > maxLength!) {
-      return maxLengthPhoneNumberErrorMessage ?? Constants.maxPhoneNumberLengthErrorMessage.replaceAll("%s", "$maxLength");
+      return maxLengthPhoneNumberErrorMessage ??
+          Constants.maxPhoneNumberLengthErrorMessage
+              .replaceAll("%s", "$maxLength");
     }
 
     return null;
@@ -138,7 +153,7 @@ class TextFieldValidator {
   /// url : it is a required parameter
   /// emptyUrlErrorMessage default message: Please enter the URL. ex: https://www.url.com
   /// invalidUrlErrorMessage default message: Please enter the valid URL. ex: https://www.url.com
-  static urlValidator({
+  static String? urlValidator({
     required String? url,
     String? emptyUrlErrorMessage,
     String? invalidUrlErrorMessage,
